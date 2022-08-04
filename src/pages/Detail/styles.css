@@ -1,0 +1,30 @@
+
+.container-img{
+    width:300px;
+    height:auto;
+    border: 1px solid #ccc;
+    borader-radius:8px;
+    margin: 0 auto;
+}
+.container-img p,span {
+    padding: 8px
+}
+.container-img img{
+    width: 100%;
+}
+.container-img .box{
+    display: flex;
+    justify-content: space-between;
+    align-items: center
+}
+ button{
+    display:block;
+    width: 100px;
+    height: 50px;
+    padding:8px;
+    cursor: pointer;
+    margin: 0 auto;
+    margin-top:24px;
+    background: #190752;
+    color: #fff;
+}
