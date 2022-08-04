@@ -5,6 +5,7 @@
     border: 1px solid #ccc;
     borader-radius:8px;
     margin: 0 auto;
+    margin-top:24px;
 }
 .container-img p,span {
     padding: 8px
@@ -27,4 +28,12 @@
     margin-top:24px;
     background: #190752;
     color: #fff;
+}
+
+.table{
+    padding:24px;
+    
+}
+.table span{
+    display:block;
 }

@@ -3,10 +3,10 @@ import { useEffect, useState } from 'react'
 import api from '../../services/api'
 import './styles.css'
 import { Link } from "react-router-dom";
-import { Filter } from '../../components/Filter/filter';
+ 
 import { Loading } from '../../components/Loading';
 import { Paginate } from '../../components/Paginate';
-
+import Select from 'react-select'
 
 export function Home(){
 
@@ -35,10 +35,14 @@ const [pages,setPages] = useState<number[]>([])
 const [currentPage, setCurrentPage] = useState(1);
 const [isLoading,setIsLoading] = useState(true);
 
+const [listName,setListName] = useState<string>('')
+const [optionsName,setOptionsName] = useState<string[]>([])
+
+
 useEffect(()=>{
     async function load(){
          
-        const response = await api.get(`character/?page=${currentPage}`)
+        const response = await api.get(`character/?page=${currentPage}&name=${listName}`)
         
         const totalPages = Math.ceil(total / limit);
 
@@ -48,6 +52,14 @@ useEffect(()=>{
           }  
          
           const totalPagesList = response.data.info.pages
+
+          const nameMap = await response.data.results.map(res => ({ label: res.name, value: res.name }))
+
+           if(listName.length <= 0){
+                setOptionsName(nameMap)
+            }
+           
+
           setTotal(totalPagesList)
           setPages(arrayPages)         
           setList(response.data.results)
@@ -55,7 +67,7 @@ useEffect(()=>{
     }
     load()
        
-},[currentPage, total,limit])
+},[currentPage, total,limit, listName])
 
 function handleNext(){
 setCurrentPage(currentPage + 1);
@@ -67,25 +79,36 @@ function handleCurrentPage(page:number){
     setCurrentPage(page)
 }
 
+function handeleOptions(opt){
+        setListName(opt.label)
+
+}
+function handleBack(){
+    setListName('')
+}
+
     if(isLoading){
         return <Loading/>
     }
 
 return(
     <div className="container">
-         
-            <div className="content">
+         <Select 
+                options={optionsName}
+                onChange={opt => handeleOptions(opt)}
+                />
+            <div className="content">    
 
                 {list.map(item =>(
-               <Link to={`detail/${item.id}`} key={item.id} > 
-                    <div className="container-img" >
-                        <p>{item.name}</p>
-                        <img src={item.image} alt={item.name} />
-                        <div className="box">
-                            <p># {item.id}</p>
-                            <span>{item.species}</span>
-                        </div>
-                    </div>
+                    <Link to={`detail/${item.id}`} key={item.id} > 
+                            <div className="container-img" >
+                                <p>{item.name}</p>
+                                <img src={item.image} alt={item.name} />
+                                <div className="box">
+                                    <p># {item.id}</p>
+                                    <span>{item.species}</span>
+                                </div>
+                            </div>
                     </Link>
 
                  ))}
@@ -100,6 +123,9 @@ return(
                     handleNext={handleNext}
                     handleCurrentPage={handleCurrentPage}                    
                     />
+            {listName.length >= 0 ?(
+                 <button onClick={handleBack}>Voltar</button>
+                 ):''}
     </div>
 )
 
