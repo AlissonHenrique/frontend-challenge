@@ -3,9 +3,6 @@ import { useEffect, useState } from 'react'
 import api from '../../services/api'
 import './styles.css'
 import { Link } from "react-router-dom";
-import { Filter } from '../../components/Filter/filter';
-import { Loading } from '../../components/Loading';
-import { Paginate } from '../../components/Paginate';
 
 
 export function Home(){
@@ -68,12 +65,11 @@ function handleCurrentPage(page:number){
 }
 
     if(isLoading){
-        return <Loading/>
+        return <h2>Carregando ...</h2>
     }
 
 return(
-    <div className="container">
-         
+    <div className="container">        
             <div className="content">
 
                 {list.map(item =>(
@@ -92,14 +88,25 @@ return(
 
    
             </div>
-            
-                <Paginate 
-                    currentPage={currentPage}                    
-                    pages={pages} 
-                    handlePrev={handlePrev}                     
-                    handleNext={handleNext}
-                    handleCurrentPage={handleCurrentPage}                    
-                    />
+            <div className="container-buttons">
+      {currentPage > 1 && (  
+                <button type='button' onClick={handlePrev}  >
+                    Anterior
+                 </button>
+         )} 
+         
+            {pages.map(page =>(
+                <button type='button' key={page} onClick={() => handleCurrentPage(page)} className={page === currentPage ? 'active' : ''} >
+                    {page}
+                </button>
+            ))}  
+        
+           {currentPage < pages.length && (  
+                 <button type='button'  onClick={handleNext} >
+                    Próximo
+                 </button>
+                  )}  
+            </div>
     </div>
 )
 

@@ -1,6 +1,7 @@
 
 import { useEffect, useState } from 'react'
 import { Link, useParams } from 'react-router-dom';
+import { Loading } from '../../components/Loading';
 import api from '../../services/api';
 import './styles.css'
 
@@ -37,11 +38,13 @@ useEffect(()=>{
                             <p># {card.id}</p>
                             <span>{card.species}</span> 
                         </div>     
-                </div>
+                    </div>
+                     
+                 
                 ) : (
-                    <p>Carregando...</p>
+                    <Loading/>
                   )}
-                <Link    to="/"><button type='button'>Voltar</button></Link>
+                <Link    to="/"><button type='button' className='back'>Voltar</button></Link>
                 </>
     )
 }

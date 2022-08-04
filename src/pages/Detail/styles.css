@@ -17,7 +17,7 @@
     justify-content: space-between;
     align-items: center
 }
- button{
+ button.back{
     display:block;
     width: 100px;
     height: 50px;
