@@ -26,7 +26,10 @@ export function Home(){
         gender:string,
         image:string
     }
-
+interface IOption{
+    name:string,
+    value:string
+}
 
 const [list,setList] = useState<IResults[]>([])
 const [total,setTotal] = useState(0)
@@ -53,7 +56,7 @@ useEffect(()=>{
          
           const totalPagesList = response.data.info.pages
 
-          const nameMap = await response.data.results.map(res => ({ label: res.name, value: res.name }))
+          const nameMap = await response.data.results.map( (res:IOption) => ({ label: res.name, value: res.name }))
 
            if(listName.length <= 0){
                 setOptionsName(nameMap)
@@ -79,8 +82,8 @@ function handleCurrentPage(page:number){
     setCurrentPage(page)
 }
 
-function handeleOptions(opt){
-        setListName(opt.label)
+function handeleOptions(opt:any){
+        setListName(opt.value)
 
 }
 function handleBack(){
@@ -95,7 +98,7 @@ return(
     <div className="container">
          <Select 
                 options={optionsName}
-                onChange={opt => handeleOptions(opt)}
+                onChange={(opt) => handeleOptions(opt)}
                 />
             <div className="content">    
 
