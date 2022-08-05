@@ -1,4 +1,14 @@
 
+## Projeto 
+
+Como instalar e startar
+git clone https://github.com/AlissonHenrique/frontend-challenge
+Va até ao repositório
+yarn i ou npm i
+yarn run dev ou npm run dev
+
+================================================================================
+
 O projeto consiste de uma tela de lista de personagens e uma tela de detalhe do personagem.
 
 Você é livre para definir o layout e arquitetura que vai utilizar. Não é necessário implementar da mesma maneira que nas imagens de exemplo. 

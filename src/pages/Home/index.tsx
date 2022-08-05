@@ -7,28 +7,29 @@ import { Link } from "react-router-dom";
 import { Loading } from '../../components/Loading';
 import { Paginate } from '../../components/Paginate';
 import Select from 'react-select'
+import { Filter } from '../../components/Filter';
 
 export function Home(){
 
-    interface IInfo{
-        count:number,   
-        pages:number,
-        next: string,
-        prev: null | number
 
-    }
-    interface IResults{         
-        id:number,
-        name:string,
-        status:string
-        species: string,
-        type: string,
-        gender:string,
-        image:string
-    }
+interface IResults{         
+    id:number,
+    name:string,
+    status:string
+    species: string,
+    type: string,
+    gender:string,
+    image:string
+}
+
 interface IOption{
     name:string,
     value:string
+  
+}
+interface IOptionMap{    
+    value:string,
+    label:string
 }
 
 const [list,setList] = useState<IResults[]>([])
@@ -82,9 +83,9 @@ function handleCurrentPage(page:number){
     setCurrentPage(page)
 }
 
-function handeleOptions(opt:any){
+function handleOptions(opt:IOptionMap){    
+    console.log(opt)        
         setListName(opt.value)
-
 }
 function handleBack(){
     setListName('')
@@ -96,10 +97,9 @@ function handleBack(){
 
 return(
     <div className="container">
-         <Select 
-                options={optionsName}
-                onChange={(opt) => handeleOptions(opt)}
-                />
+      
+                <Filter optionsName={optionsName} onHandleOptions={handleOptions}/>
+
             <div className="content">    
 
                 {list.map(item =>(
