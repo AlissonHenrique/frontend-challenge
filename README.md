@@ -1,11 +1,16 @@
 
 ## Projeto 
 
-Como instalar e startar
-git clone https://github.com/AlissonHenrique/frontend-challenge
-Va até ao repositório
+Como instalar e 
+
+git clone https://github.com/AlissonHenrique/frontend-
+
+Va até ao 
+
 yarn i ou npm i
-yarn run dev ou npm run dev
+
+yarn run dev ou npm run 
+
 
 ================================================================================
 
